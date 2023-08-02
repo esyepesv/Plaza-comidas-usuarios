@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/usuarios")
 @RequiredArgsConstructor
@@ -18,7 +20,8 @@ public class UserRestController {
 
 
     @PostMapping("/crearPropietario")
-    public ResponseEntity<Void> crearPropietario(@RequestBody UserRequest userRequest){
+    public ResponseEntity<Void> crearPropietario(@Valid @RequestBody UserRequest userRequest){
+        userRequest.setIdRol(2L);
         userHandler.saveUser(userRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
