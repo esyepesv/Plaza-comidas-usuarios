@@ -1,19 +1,20 @@
 package com.users.users.domain.model;
 
 
+import java.time.LocalDate;
+
 public class User {
     private Long id;
     private String name;
     private String lastName;
     private String document;
     private String phone;
-    private String birthDate;
+    private LocalDate birthDate;
     private String email;
     private String password;
     private Long idRol;
 
-
-    public User(Long id, String name, String lastName, String document, String phone, String birthDate, String email, String password, Long idRol) {
+    public User(Long id, String name, String lastName, String document, String phone, LocalDate birthDate, String email, String password, Long idRol) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -23,6 +24,9 @@ public class User {
         this.email = email;
         this.password = password;
         this.idRol = idRol;
+    }
+
+    public User() {
     }
 
     public Long getId() {
@@ -65,11 +69,11 @@ public class User {
         this.phone = phone;
     }
 
-    public String getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
