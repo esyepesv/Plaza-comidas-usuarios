@@ -19,6 +19,8 @@ public class UserRestController {
     private final IUserHandler userHandler;
 
 
+    //@Operation(summary = "/usuarios/crearPropietario", description = "creacion de usuarios propietarios")
+
     @PostMapping("/crearPropietario")
     public ResponseEntity<Void> crearPropietario(@Valid @RequestBody UserRequest userRequest){
         userRequest.setIdRol(2L);

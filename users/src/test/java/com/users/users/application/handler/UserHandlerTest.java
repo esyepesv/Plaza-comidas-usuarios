@@ -61,9 +61,7 @@ public class UserHandlerTest {
 
         when(userRequestMapper.toUser(userRequest)).thenReturn(user);
 
-        // When
         userHandler.saveUser(userRequest);
-
 
         assertEquals(user.getName(), userRequest.getName());
         assertEquals(user.getLastName(), userRequest.getLastName());
