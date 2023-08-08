@@ -1,6 +1,7 @@
 package com.users.users.application.mapper;
 
 import com.users.users.application.dto.UserResponse;
+import com.users.users.domain.model.Rol;
 import com.users.users.domain.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
