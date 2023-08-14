@@ -24,11 +24,24 @@ public class UserRestController {
 
 
     @Operation(summary = "/usuarios/crearPropietario", description = "creacion de usuarios propietarios")
-
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Owner created", content = @Content),
+    })
     @PostMapping("/crearPropietario")
     public ResponseEntity<Void> crearPropietario(@Valid @RequestBody UserRequest userRequest){
         userRequest.setIdRol(2L);
         userRequest.setRole(Role.OWNER);
+        userHandler.saveUser(userRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @Operation(summary = "/usuarios/crearPropietario", description = "creacion de usuarios propietarios")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Owner created", content = @Content),
+    })
+    @PostMapping("/crearEmpleado")
+    public ResponseEntity<Void> crearEmpleado(@Valid @RequestBody UserRequest userRequest){
+        userRequest.setRole(Role.EMPLOYEE);
         userHandler.saveUser(userRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

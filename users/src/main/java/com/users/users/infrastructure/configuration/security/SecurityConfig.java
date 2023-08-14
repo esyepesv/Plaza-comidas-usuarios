@@ -28,6 +28,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .antMatchers("/auth/**").permitAll()
                  .antMatchers("/usuarios/crearPropietario").hasRole("ADMIN")
+                 .antMatchers("/usuarios/crearEmpleado").hasRole("OWNER")
                  .antMatchers("/usuarios/{userId}").permitAll()
                 .anyRequest()
                 .authenticated()
