@@ -25,6 +25,15 @@ public class JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
+    public String extractRole(String token) {
+        return extractClaim(token, claims -> claims.get("role", String.class));
+    }
+
+    public Long extractId(String token){
+        return extractClaim(token, claims -> claims.get("id", Long.class));
+    }
+
+
     public <T> T extractClaim(String token, Function<Claims, T> claimResolver){
         final Claims claims = extractAllClaims(token);
         return claimResolver.apply(claims);
@@ -40,9 +49,10 @@ public class JwtService {
         return Jwts
                 .builder()
                 .claim("role", userRole.toString())
+                .claim("id", ((UserEntity) userDetails).getId())
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
@@ -68,7 +78,7 @@ public class JwtService {
                 .getBody();
     }
 
-    private Key getSignInKey() {
+    public Key getSignInKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }

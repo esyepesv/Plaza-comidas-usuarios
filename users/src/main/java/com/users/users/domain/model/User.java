@@ -2,6 +2,7 @@ package com.users.users.domain.model;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class User {
     private Long id;
@@ -14,6 +15,7 @@ public class User {
     private String password;
     private Long idRol;
     private Role role;
+
 
     public Role getRole() {
         return role;
