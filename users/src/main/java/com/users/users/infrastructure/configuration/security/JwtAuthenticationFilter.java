@@ -1,6 +1,8 @@
-package com.users.users.infrastructure.security;
+package com.users.users.infrastructure.configuration.security;
 
-import io.jsonwebtoken.Claims;
+import com.users.users.application.auth.JwtService;
+import com.users.users.domain.model.Role;
+import com.users.users.infrastructure.output.jpa.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,18 +19,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.*;
+import java.util.Collections;
 
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
-    private final UserDetailsServiceImpl userDetailsService;
+    private final UserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(@NotNull HttpServletRequest request,
@@ -47,18 +45,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         jwt = authHeader.substring(7);
         userEmail = jwtService.extractUsername(jwt);
         if(userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null){
+
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+
             if (jwtService.isTokenValid(jwt, userDetails)){
-                Claims claims = jwtService.extractAllClaims(jwt);
-                List<SimpleGrantedAuthority> authorities = Arrays.stream(claims.get("roles").toString().split(","))
-                        .map(SimpleGrantedAuthority::new)
-                        .collect(toList());
+
+                Role userRole = ((UserEntity) userDetails).getRole();
 
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,
-                        authorities
-                );
+                        Collections.singleton(new SimpleGrantedAuthority("ROLE_" + userRole.toString())));
 
                 authToken.setDetails(
                         new WebAuthenticationDetailsSource().buildDetails(request)

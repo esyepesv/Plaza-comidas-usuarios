@@ -3,6 +3,7 @@ package com.users.users.infrastructure.input.rest;
 import com.users.users.application.dto.UserRequest;
 import com.users.users.application.dto.UserResponse;
 import com.users.users.application.handler.IUserHandler;
+import com.users.users.domain.model.Role;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -27,6 +28,7 @@ public class UserRestController {
     @PostMapping("/crearPropietario")
     public ResponseEntity<Void> crearPropietario(@Valid @RequestBody UserRequest userRequest){
         userRequest.setIdRol(2L);
+        userRequest.setRole(Role.OWNER);
         userHandler.saveUser(userRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -39,6 +41,12 @@ public class UserRestController {
     })
     @GetMapping("/{userId}")
     public ResponseEntity<UserResponse> getUser(@PathVariable Long userId){
-        return ResponseEntity.ok(userHandler.getUser(userId));
+        UserResponse userResponse = userHandler.getUser(userId);
+
+        if (userResponse != null) {
+            return ResponseEntity.ok(userResponse);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

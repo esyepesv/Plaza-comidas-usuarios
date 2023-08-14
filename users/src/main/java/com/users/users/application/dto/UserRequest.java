@@ -1,6 +1,7 @@
 package com.users.users.application.dto;
 
 import com.users.users.application.validation.Adult;
+import com.users.users.domain.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,4 +28,5 @@ public class UserRequest {
     private String email;
     private String password;
     private Long idRol;
+    private Role role;
 }

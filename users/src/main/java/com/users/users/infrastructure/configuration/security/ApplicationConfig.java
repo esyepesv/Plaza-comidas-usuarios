@@ -1,4 +1,4 @@
-package com.users.users.infrastructure.security;
+package com.users.users.infrastructure.configuration.security;
 
 import com.users.users.infrastructure.exception.UserNotFoundException;
 import com.users.users.infrastructure.output.jpa.repository.IUserRepository;

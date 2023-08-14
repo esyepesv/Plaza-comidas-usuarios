@@ -1,5 +1,7 @@
-package com.users.users.infrastructure.security;
+package com.users.users.application.auth;
 
+import com.users.users.domain.model.Role;
+import com.users.users.infrastructure.output.jpa.entity.UserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -29,15 +31,15 @@ public class JwtService {
     }
 
     public String generateToken(UserDetails userDetails){
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("roles", userDetails.getAuthorities());
-        return generateToken(claims, userDetails);
+        return generateToken(new HashMap<>(), userDetails);
     }
 
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails){
+        Role userRole = ((UserEntity) userDetails).getRole();
+
         return Jwts
                 .builder()
-                .setClaims(extraClaims)
+                .claim("role", userRole.toString())
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))

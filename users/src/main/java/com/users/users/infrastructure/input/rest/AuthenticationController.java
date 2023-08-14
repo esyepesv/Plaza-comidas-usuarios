@@ -1,7 +1,8 @@
-package com.users.users.infrastructure.input.rest.auth;
+package com.users.users.infrastructure.input.rest;
 
 import com.users.users.application.dto.AuthenticationRequest;
 import com.users.users.application.dto.AuthenticationResponse;
+import com.users.users.application.auth.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,11 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
 
     private final AuthenticationService service;
-
-    @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request){
-        return ResponseEntity.ok(service.register(request));
-    }
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
