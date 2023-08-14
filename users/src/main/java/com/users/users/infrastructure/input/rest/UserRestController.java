@@ -35,9 +35,9 @@ public class UserRestController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @Operation(summary = "/usuarios/crearPropietario", description = "creacion de usuarios propietarios")
+    @Operation(summary = "/usuarios/crearEmplado", description = "creacion de usuarios empleados")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Owner created", content = @Content),
+            @ApiResponse(responseCode = "201", description = "Employee created", content = @Content),
     })
     @PostMapping("/crearEmpleado")
     public ResponseEntity<Void> crearEmpleado(@Valid @RequestBody UserRequest userRequest){
