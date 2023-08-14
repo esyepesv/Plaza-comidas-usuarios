@@ -13,8 +13,17 @@ public class User {
     private String email;
     private String password;
     private Long idRol;
+    private Role role;
 
-    public User(Long id, String name, String lastName, String document, String phone, LocalDate birthDate, String email, String password, Long idRol) {
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public User(Long id, String name, String lastName, String document, String phone, LocalDate birthDate, String email, String password, Long idRol, Role role) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -24,6 +33,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.idRol = idRol;
+        this.role = role;
     }
 
     public User() {
