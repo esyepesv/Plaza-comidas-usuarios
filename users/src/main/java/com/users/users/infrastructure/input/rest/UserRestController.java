@@ -23,7 +23,7 @@ public class UserRestController {
     private final IUserHandler userHandler;
 
 
-    @Operation(summary = "/usuarios/crearPropietario")
+    @Operation(summary = "Create a new owner")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Owner created", content = @Content),
     })
@@ -35,7 +35,7 @@ public class UserRestController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @Operation(summary = "/usuarios/crearEmpleado")
+    @Operation(summary = "Create a new employee")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Employee created", content = @Content),
     })
@@ -46,7 +46,7 @@ public class UserRestController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @Operation(summary = "/usuarios/crearCliente")
+    @Operation(summary = "Create a new client")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Client created", content = @Content),
     })
@@ -57,7 +57,7 @@ public class UserRestController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @Operation(summary = "obtener un usuario por su id")
+    @Operation(summary = "Get a user by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User found",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponse.class))),
