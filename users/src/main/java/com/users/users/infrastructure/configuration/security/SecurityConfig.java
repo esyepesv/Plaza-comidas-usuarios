@@ -29,6 +29,7 @@ public class SecurityConfig {
                 .antMatchers("/auth/**").permitAll()
                  .antMatchers("/usuarios/crearPropietario").hasRole("ADMIN")
                  .antMatchers("/usuarios/crearEmpleado").hasRole("OWNER")
+                 .antMatchers("/usuarios/crearCliente").permitAll()
                  .antMatchers("/usuarios/{userId}").permitAll()
                 .anyRequest()
                 .authenticated()

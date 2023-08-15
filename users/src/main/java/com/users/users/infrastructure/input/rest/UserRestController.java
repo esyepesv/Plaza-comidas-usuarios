@@ -23,7 +23,7 @@ public class UserRestController {
     private final IUserHandler userHandler;
 
 
-    @Operation(summary = "/usuarios/crearPropietario", description = "creacion de usuarios propietarios")
+    @Operation(summary = "/usuarios/crearPropietario")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Owner created", content = @Content),
     })
@@ -35,13 +35,24 @@ public class UserRestController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @Operation(summary = "/usuarios/crearEmplado", description = "creacion de usuarios empleados")
+    @Operation(summary = "/usuarios/crearEmpleado")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Employee created", content = @Content),
     })
     @PostMapping("/crearEmpleado")
     public ResponseEntity<Void> crearEmpleado(@Valid @RequestBody UserRequest userRequest){
         userRequest.setRole(Role.EMPLOYEE);
+        userHandler.saveUser(userRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @Operation(summary = "/usuarios/crearCliente")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Client created", content = @Content),
+    })
+    @PostMapping("/crearCliente")
+    public ResponseEntity<Void> crearCliente(@Valid @RequestBody UserRequest userRequest){
+        userRequest.setRole(Role.CLIENT);
         userHandler.saveUser(userRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
