@@ -29,26 +29,25 @@ class JwtServiceTest {
     @Mock
     private UserDetails userDetails;
 
+    private final String TEST_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJpZCI6MSwic3ViIjoic3RpdmVuQHllcGVzLmNvbSIsImlhdCI6MTY5MjIxODY4OSwiZXhwIjoxNjkyMzA1MDg5fQ.bmrCSB5BK2pBKWNX-3RvCTJBMlCSzDrODIhjHy4l1c0";
+
     @Test
     void extractUsername() {
-        String token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJpZCI6MSwic3ViIjoic3RpdmVuQHllcGVzLmNvbSIsImlhdCI6MTY5MjAyOTI0MiwiZXhwIjoxNjkyMTE1NjQyfQ.k7MdD4EiE_Yucxh-UxnKH1mpvxQeV_iA6z9-aYcKiCc";
-        String extractedUsername = jwtService.extractUsername(token);
+        String extractedUsername = jwtService.extractUsername(TEST_TOKEN);
 
         assertEquals("stiven@yepes.com", extractedUsername);
     }
 
     @Test
     void extractRole() {
-        String token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJpZCI6MSwic3ViIjoic3RpdmVuQHllcGVzLmNvbSIsImlhdCI6MTY5MjAyOTI0MiwiZXhwIjoxNjkyMTE1NjQyfQ.k7MdD4EiE_Yucxh-UxnKH1mpvxQeV_iA6z9-aYcKiCc";
-        String extractedRole = jwtService.extractRole(token);
+        String extractedRole = jwtService.extractRole(TEST_TOKEN);
 
         assertEquals("ADMIN", extractedRole);
     }
 
     @Test
     void extractId() {
-        String token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiQURNSU4iLCJpZCI6MSwic3ViIjoic3RpdmVuQHllcGVzLmNvbSIsImlhdCI6MTY5MjAyOTI0MiwiZXhwIjoxNjkyMTE1NjQyfQ.k7MdD4EiE_Yucxh-UxnKH1mpvxQeV_iA6z9-aYcKiCc";
-        Long extractedId = jwtService.extractId(token);
+        Long extractedId = jwtService.extractId(TEST_TOKEN);
 
         assertEquals(1, extractedId);
     }
