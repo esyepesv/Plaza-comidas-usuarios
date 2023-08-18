@@ -27,7 +27,7 @@ public class UserRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Owner created", content = @Content),
     })
-    @PostMapping("/createOwner")
+    @PostMapping("/create-owner")
     public ResponseEntity<Void> createOwner(@Valid @RequestBody UserRequest userRequest){
         userRequest.setIdRol(idRolOwner);
         userRequest.setRole(Role.OWNER);
@@ -39,7 +39,7 @@ public class UserRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Employee created", content = @Content),
     })
-    @PostMapping("/createEmployee")
+    @PostMapping("/create-employee")
     public ResponseEntity<Void> createEmployee(@Valid @RequestBody UserRequest userRequest){
         userRequest.setRole(Role.EMPLOYEE);
         userHandler.saveUser(userRequest);
@@ -50,7 +50,7 @@ public class UserRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Client created", content = @Content),
     })
-    @PostMapping("/createClient")
+    @PostMapping("/create-client")
     public ResponseEntity<Void> createClient(@Valid @RequestBody UserRequest userRequest){
         userRequest.setRole(Role.CLIENT);
         userHandler.saveUser(userRequest);
