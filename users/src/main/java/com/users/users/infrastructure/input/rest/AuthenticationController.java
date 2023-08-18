@@ -2,7 +2,7 @@ package com.users.users.infrastructure.input.rest;
 
 import com.users.users.application.dto.AuthenticationRequest;
 import com.users.users.application.dto.AuthenticationResponse;
-import com.users.users.application.auth.AuthenticationService;
+import com.users.users.infrastructure.configuration.security.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

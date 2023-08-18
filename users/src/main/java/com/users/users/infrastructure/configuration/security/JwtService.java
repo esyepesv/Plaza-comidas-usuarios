@@ -1,4 +1,4 @@
-package com.users.users.application.auth;
+package com.users.users.infrastructure.configuration.security;
 
 import com.users.users.domain.model.Role;
 import com.users.users.infrastructure.output.jpa.entity.UserEntity;

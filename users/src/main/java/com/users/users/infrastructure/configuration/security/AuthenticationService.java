@@ -1,4 +1,4 @@
-package com.users.users.application.auth;
+package com.users.users.infrastructure.configuration.security;
 
 import com.users.users.application.dto.AuthenticationRequest;
 import com.users.users.application.dto.AuthenticationResponse;

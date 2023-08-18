@@ -17,19 +17,19 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserRestController {
     private final IUserHandler userHandler;
-
+    Long idRolOwner = 2L;
 
     @Operation(summary = "Create a new owner")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Owner created", content = @Content),
     })
-    @PostMapping("/crearPropietario")
-    public ResponseEntity<Void> crearPropietario(@Valid @RequestBody UserRequest userRequest){
-        userRequest.setIdRol(2L);
+    @PostMapping("/createOwner")
+    public ResponseEntity<Void> createOwner(@Valid @RequestBody UserRequest userRequest){
+        userRequest.setIdRol(idRolOwner);
         userRequest.setRole(Role.OWNER);
         userHandler.saveUser(userRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -39,8 +39,8 @@ public class UserRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Employee created", content = @Content),
     })
-    @PostMapping("/crearEmpleado")
-    public ResponseEntity<Void> crearEmpleado(@Valid @RequestBody UserRequest userRequest){
+    @PostMapping("/createEmployee")
+    public ResponseEntity<Void> createEmployee(@Valid @RequestBody UserRequest userRequest){
         userRequest.setRole(Role.EMPLOYEE);
         userHandler.saveUser(userRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -50,8 +50,8 @@ public class UserRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Client created", content = @Content),
     })
-    @PostMapping("/crearCliente")
-    public ResponseEntity<Void> crearCliente(@Valid @RequestBody UserRequest userRequest){
+    @PostMapping("/createClient")
+    public ResponseEntity<Void> createClient(@Valid @RequestBody UserRequest userRequest){
         userRequest.setRole(Role.CLIENT);
         userHandler.saveUser(userRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();

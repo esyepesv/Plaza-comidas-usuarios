@@ -31,6 +31,8 @@ public class SecurityConfig {
                  .antMatchers("/usuarios/crearEmpleado").hasRole("OWNER")
                  .antMatchers("/usuarios/crearCliente").permitAll()
                  .antMatchers("/usuarios/{userId}").permitAll()
+                 .antMatchers("/swagger-ui/**").permitAll()
+                 .antMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
