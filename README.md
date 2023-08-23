@@ -2,7 +2,7 @@
 <div align="center">
 <h3 align="center">Plaza de comidas</h3>
   <p align="center">
-      Microservicio de usuarios
+      Users Microservice
   </p>
 </div>
 
